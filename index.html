@@ -5,37 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Workforce Transformation — Position Proposal</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300&family=Source+Serif+4:wght@400&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink: #1a1a18;
-    --ink-mid: #4a4a46;
-    --ink-soft: #7a7a74;
-    --ink-faint: #b0b0a8;
-    --surface: #fafaf8;
-    --surface-mid: #f0f0ec;
-    --surface-dark: #e4e4de;
-    --teal: #0f6e56;
-    --teal-light: #e1f5ee;
-    --teal-mid: #1d9e75;
-    --amber: #854f0b;
-    --amber-light: #faeeda;
-    --blue: #185fa5;
-    --blue-light: #e6f1fb;
-    --red-light: #fcebeb;
-    --red: #a32d2d;
-    --border: rgba(26,26,24,0.1);
-    --border-mid: rgba(26,26,24,0.18);
+    --ink: #1a1a1a;
+    --ink-mid: #4a4a4a;
+    --ink-soft: #7a7a7a;
+    --ink-faint: #a8a8a8;
+    --surface: #fafafa;
+    --surface-mid: #f2f2f0;
+    --surface-dark: #e6e6e2;
+    --ohio-blue: #0E3F75;
+    --ohio-blue-light: #e8eef6;
+    --ohio-blue-mid: #1a5299;
+    --ohio-red: #C12637;
+    --ohio-red-light: #faeaec;
+    --amber: #7a5200;
+    --amber-light: #fdf3dc;
+    --border: rgba(14,63,117,0.1);
+    --border-mid: rgba(14,63,117,0.2);
     --radius: 10px;
     --radius-sm: 6px;
   }
 
-  html { font-size: 16px; scroll-behavior: smooth; }
+  html { font-size: 17px; scroll-behavior: smooth; }
 
   body {
-    font-family: 'DM Sans', system-ui, sans-serif;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
     background: var(--surface);
     color: var(--ink);
     line-height: 1.6;
@@ -48,6 +46,7 @@
   /* ── HEADER ── */
   .site-header {
     border-bottom: 1px solid var(--border);
+    border-top: 3px solid var(--ohio-red);
     padding: 1.25rem 0;
     margin-bottom: 3rem;
     display: flex;
@@ -55,10 +54,11 @@
     justify-content: space-between;
   }
   .site-header .wordmark {
-    font-family: 'DM Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 12px;
     color: var(--ink-soft);
     letter-spacing: 0.04em;
+    font-weight: 600;
   }
   .site-header .label {
     font-size: 11px;
@@ -73,8 +73,8 @@
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--teal);
-    font-weight: 500;
+    color: var(--ohio-blue);
+    font-weight: 600;
     margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
@@ -85,7 +85,7 @@
     display: inline-block;
     width: 20px;
     height: 1.5px;
-    background: var(--teal);
+    background: var(--ohio-red);
   }
   .hero h1 {
     font-size: clamp(26px, 4vw, 38px);
@@ -114,9 +114,9 @@
     border-radius: 999px;
     border: 1px solid;
   }
-  .badge-teal { background: var(--teal-light); color: var(--teal); border-color: rgba(15,110,86,0.25); }
-  .badge-amber { background: var(--amber-light); color: var(--amber); border-color: rgba(133,79,11,0.25); }
-  .badge-blue { background: var(--blue-light); color: var(--blue); border-color: rgba(24,95,165,0.25); }
+  .badge-teal { background: var(--ohio-blue-light); color: var(--ohio-blue); border-color: rgba(14,63,117,0.25); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); border-color: rgba(122,82,0,0.25); }
+  .badge-blue { background: var(--ohio-blue-light); color: var(--ohio-blue-mid); border-color: rgba(14,63,117,0.2); }
 
   /* ── NAV TABS ── */
   .tab-nav {
@@ -128,8 +128,8 @@
     -webkit-overflow-scrolling: touch;
   }
   .tab-nav::-webkit-scrollbar { display: none; }
-  .tab-btn {
-    font-family: 'DM Sans', sans-serif;
+  .tab-btn { 
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 14px;
     font-weight: 400;
     color: var(--ink-soft);
@@ -142,8 +142,8 @@
     margin-bottom: -1px;
     transition: color 0.15s, border-color 0.15s;
   }
-  .tab-btn:hover { color: var(--ink); }
-  .tab-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
+  .tab-btn:hover { color: var(--ohio-blue); }
+  .tab-btn.active { color: var(--ohio-blue); border-bottom-color: var(--ohio-blue); font-weight: 600; }
 
   /* ── PANELS ── */
   .tab-panel { display: none; }
@@ -164,8 +164,8 @@
 
   /* ── CALLOUT ── */
   .callout {
-    border-left: 3px solid var(--teal-mid);
-    background: #f5fdf9;
+    border-left: 3px solid var(--ohio-red);
+    background: #f6f8fc;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     padding: 1rem 1.25rem;
     margin-bottom: 1rem;
@@ -173,7 +173,7 @@
     color: var(--ink-mid);
     line-height: 1.7;
   }
-  .callout strong { color: var(--ink); font-weight: 500; }
+  .callout strong { color: var(--ohio-blue); font-weight: 600; }
 
   /* ── CARDS ── */
   .card {
@@ -185,8 +185,8 @@
   }
   .card-title {
     font-size: 14px;
-    font-weight: 500;
-    color: var(--ink);
+    font-weight: 600;
+    color: var(--ohio-blue);
     margin-bottom: 0.4rem;
   }
   .card-body {
@@ -217,9 +217,10 @@
   }
   .duty-row:last-child { border-bottom: none; }
   .duty-num {
-    font-family: 'DM Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
-    color: var(--ink-faint);
+    font-weight: 600;
+    color: var(--ohio-red);
     min-width: 20px;
     padding-top: 2px;
   }
@@ -229,7 +230,7 @@
     line-height: 1.65;
     flex: 1;
   }
-  .duty-text strong { color: var(--ink); font-weight: 500; }
+  .duty-text strong { color: var(--ohio-blue); font-weight: 600; }
 
   /* ── PILLS ── */
   .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
@@ -262,11 +263,11 @@
     white-space: nowrap;
     margin-top: 1px;
   }
-  .risk-high { background: var(--red-light); color: var(--red); }
+  .risk-high { background: var(--ohio-red-light); color: var(--ohio-red); }
   .risk-med { background: var(--amber-light); color: var(--amber); }
-  .risk-low { background: var(--teal-light); color: var(--teal); }
+  .risk-low { background: var(--ohio-blue-light); color: var(--ohio-blue); }
   .risk-body { font-size: 13.5px; color: var(--ink-mid); line-height: 1.65; flex: 1; }
-  .risk-body strong { color: var(--ink); font-weight: 500; }
+  .risk-body strong { color: var(--ohio-blue); font-weight: 600; }
 
   /* ── FOOTER NOTE ── */
   .footer-note {
@@ -299,7 +300,6 @@
     <p class="hero-sub">A proposed embedded role within OCB to lead the state's labor-side AI integration work — before the grievances get there first.</p>
     <div class="badge-row">
       <span class="badge badge-teal">Project Manager 2 · Pay Range 16</span>
-      <span class="badge badge-amber">Classification series 6338</span>
       <span class="badge badge-blue">Alternate: LRA 2 · PR 16</span>
     </div>
   </div>
