@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Workforce Transformation — Position Proposal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-mid: #4a4a46;
+    --ink-soft: #7a7a74;
+    --ink-faint: #b0b0a8;
+    --surface: #fafaf8;
+    --surface-mid: #f0f0ec;
+    --surface-dark: #e4e4de;
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --teal-mid: #1d9e75;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --blue: #185fa5;
+    --blue-light: #e6f1fb;
+    --red-light: #fcebeb;
+    --red: #a32d2d;
+    --border: rgba(26,26,24,0.1);
+    --border-mid: rgba(26,26,24,0.18);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── LAYOUT ── */
+  .page-wrap { max-width: 780px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+  /* ── HEADER ── */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 0;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-header .wordmark {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .site-header .label {
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero { margin-bottom: 3rem; }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--teal);
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    font-weight: 500;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--ink-mid);
+    max-width: 580px;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid;
+  }
+  .badge-teal { background: var(--teal-light); color: var(--teal); border-color: rgba(15,110,86,0.25); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); border-color: rgba(133,79,11,0.25); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); border-color: rgba(24,95,165,0.25); }
+
+  /* ── NAV TABS ── */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.65rem 1.1rem;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
+
+  /* ── PANELS ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 2.5rem; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-left: 3px solid var(--teal-mid);
+    background: #f5fdf9;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    font-size: 14.5px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+  .callout strong { color: var(--ink); font-weight: 500; }
+
+  /* ── CARDS ── */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .card-body {
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  /* ── METRICS ── */
+  .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+  .metric {
+    background: var(--surface-mid);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.1rem;
+  }
+  .metric-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .metric-value { font-size: 20px; font-weight: 500; color: var(--ink); }
+  .metric-sub { font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+
+  /* ── DUTIES ── */
+  .duty-list { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .duty-row {
+    display: flex;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .duty-row:last-child { border-bottom: none; }
+  .duty-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    min-width: 20px;
+    padding-top: 2px;
+  }
+  .duty-text {
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    flex: 1;
+  }
+  .duty-text strong { color: var(--ink); font-weight: 500; }
+
+  /* ── PILLS ── */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+  .pill {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--surface-mid);
+    color: var(--ink-mid);
+    border: 1px solid var(--border);
+  }
+
+  /* ── RISKS ── */
+  .risk-list { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .risk-row {
+    display: flex;
+    gap: 0.85rem;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .risk-row:last-child { border-bottom: none; }
+  .risk-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+  .risk-high { background: var(--red-light); color: var(--red); }
+  .risk-med { background: var(--amber-light); color: var(--amber); }
+  .risk-low { background: var(--teal-light); color: var(--teal); }
+  .risk-body { font-size: 13.5px; color: var(--ink-mid); line-height: 1.65; flex: 1; }
+  .risk-body strong { color: var(--ink); font-weight: 500; }
+
+  /* ── FOOTER NOTE ── */
+  .footer-note {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--ink-faint);
+    line-height: 1.65;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 520px) {
+    .metric-grid { grid-template-columns: 1fr; }
+    .site-header .label { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header">
+    <div class="wordmark">DAS / Office of Collective Bargaining</div>
+    <div class="label">Position Proposal · 2025</div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-eyebrow">New position proposal</div>
+    <h1>AI Workforce<br><em>Transformation</em> Project Manager</h1>
+    <p class="hero-sub">A proposed embedded role within OCB to lead the state's labor-side AI integration work — before the grievances get there first.</p>
+    <div class="badge-row">
+      <span class="badge badge-teal">Project Manager 2 · Pay Range 16</span>
+      <span class="badge badge-amber">Classification series 6338</span>
+      <span class="badge badge-blue">Alternate: LRA 2 · PR 16</span>
+    </div>
+  </div>
+
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" onclick="switchTab(this,'case')" role="tab">Strategic case</button>
+    <button class="tab-btn" onclick="switchTab(this,'duties')" role="tab">Position duties</button>
+    <button class="tab-btn" onclick="switchTab(this,'class')" role="tab">Classification fit</button>
+    <button class="tab-btn" onclick="switchTab(this,'risks')" role="tab">Risks &amp; counters</button>
+  </nav>
+
+  <!-- ── STRATEGIC CASE ── -->
+  <div id="case" class="tab-panel active">
+
+    <div class="section">
+      <div class="section-label">The opportunity</div>
+      <div class="callout">
+        <strong>The state is already in AI transformation — it just doesn't have a dedicated labor-side lead yet.</strong> Every major AI tool deployment touching state employees has collective bargaining implications: classification questions, workload redistribution, fair labor practice exposure, and contract language that wasn't written with AI-augmented work in mind. OCB is the right home for this role because every other agency's AI adoption eventually lands here when a grievance or classification dispute follows. Getting ahead of that isn't optional — it's inevitable.
+      </div>
+      <div class="callout">
+        <strong>The hard problem isn't the technology — it's the workforce.</strong> Agencies can deploy an AI tool in a matter of weeks. What they cannot do quickly is answer what happens to the people whose work it changes: how roles are reclassified, how performance is evaluated, what the contract says, and what the union will ask at the table. This role is not about understanding the tools. It is about understanding the human and organizational consequences when those tools arrive — and having the project management infrastructure to address those consequences before they become disputes.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Why PM 2 at Pay Range 16</div>
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-label">Classification scope</div>
+          <div class="metric-value">Cross-agency</div>
+          <div class="metric-sub">Primary stakeholders are agency executives — the PM 2 definition verbatim</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Target pay range</div>
+          <div class="metric-value">16</div>
+          <div class="metric-sub">PM 2 and LRA 2 both land at PR 16 — either classification path supports the same pay range</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Classification and internal optics</div>
+        <div class="card-body">LRA 2 is defensible — the labor relations content is real and the pay range is the same. PM 2 is the stronger choice because it signals a distinct, project-oriented function rather than a traditional labor relations seat. Existing LRA staff are less likely to read a PM 2 as a career-path intrusion — it is a different series with a different skill profile. OCB gains a new capability rather than appearing to fill a familiar role from outside the existing progression.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">The purpose of this role</div>
+      <div class="callout">
+        AI adoption across state government is accelerating — and the labor relations consequences will follow. As agencies integrate AI tools into daily operations, unions will ask questions that existing contract language was never written to answer, and exempt employees will encounter the same disruptions without a bargaining process to surface them. OCB's ability to respond to those questions with speed and consistency — across both populations, across all agencies, rather than one grievance or one OAC revision at a time — depends on having the infrastructure in place before the questions arrive at scale. This role is that infrastructure. A project management function with embedded labor relations expertise, positioned in OCB to move quickly, coordinate across agencies, and give the state a coherent posture on AI workforce issues rather than an improvised one.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── DUTIES ── -->
+  <div id="duties" class="tab-panel">
+
+    <div class="section">
+      <div class="section-label">Proposed duties — in order of importance</div>
+      <div class="duty-list">
+        <div class="duty-row">
+          <div class="duty-num">01</div>
+          <div class="duty-text"><strong>Serves as OCB's designated point of contact for AI-related workforce transformation</strong> across state agencies; collaborates with DAS State Services subject matter experts to align AI workforce initiatives with statewide HR and labor strategy; coordinates with agency human capital officers, DAS leadership, and union representatives to identify emerging labor relations issues arising from AI tool adoption, automation, and workforce restructuring; maintains a cross-agency inventory of active AI deployments with collective bargaining implications.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">02</div>
+          <div class="duty-text"><strong>Manages the full project lifecycle for AI workforce integration initiatives</strong> with cross-agency scope; establishes and maintains project charters, scope documents, stakeholder registers, and risk logs for each initiative; defines timelines, milestones, and resource requirements; coordinates multi-agency working groups through each phase from initiation through implementation and closeout; produces regular status reports and executive briefings for OCB leadership and DAS executives; identifies schedule or scope variances early and recommends corrective action; ensures milestones are met, deliverables meet quality standards before advancing to subsequent project phases, and risks are flagged to project sponsors proactively.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">03</div>
+          <div class="duty-text"><strong>Analyzes collective bargaining agreement language and Ohio Administrative Code provisions</strong> to identify provisions affected by AI deployment across both bargaining unit and exempt employee populations — including work assignment, classification, discipline, and performance evaluation; advises OCB leadership and agency customers on contract and rule interpretation; recommends proactive modifications, policy updates, or memoranda of understanding to address gaps before they generate grievances or compliance issues.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">04</div>
+          <div class="duty-text"><strong>Develops and delivers training and guidance materials</strong> for state agency management on the labor relations dimensions of AI adoption; presents at interagency forums, labor-management committee meetings, and executive briefings; produces written guides, policy templates, and reference resources for agency HR and labor relations staff.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">05</div>
+          <div class="duty-text"><strong>Monitors legislative, regulatory, and executive order developments</strong> related to AI in government employment at the state and federal level; assesses impact on Ohio's collective bargaining obligations; briefs OCB leadership and prepares recommended agency guidance in response to new requirements.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">06</div>
+          <div class="duty-text"><strong>Serves as agency representative in cross-governmental forums and workgroups</strong> on AI workforce policy — including DAS State Services, InnovateOhio, and relevant national associations; markets OCB's AI workforce program to agency executives; establishes OCB as the authoritative resource for labor-side AI questions across state government.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">07</div>
+          <div class="duty-text"><strong>Attends meetings, conferences, and professional development</strong> on AI tools, workforce transformation, and labor relations; reports findings to OCB leadership; identifies opportunities to build OCB's organizational capacity in AI-relevant areas.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Expected deliverables — year one</div>
+      <div class="duty-list">
+        <div class="duty-row">
+          <div class="duty-num">D1</div>
+          <div class="duty-text"><strong>Cross-agency AI deployment inventory.</strong> A living tracker of AI tools actively deployed or in procurement across state agencies, mapped to affected classifications, bargaining units, and relevant contract provisions. Serves as OCB's ground-truth reference for where labor relations exposure exists and where it is developing.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">D2</div>
+          <div class="duty-text"><strong>Contract language gap analysis.</strong> A structured review of all five collective bargaining agreements identifying provisions that are silent, ambiguous, or inadequate with respect to AI-augmented work — covering work assignment, performance evaluation, discipline, classification, and layoff. Delivered with prioritized recommendations for proactive negotiation or interim guidance.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">D3</div>
+          <div class="duty-text"><strong>OAC policy gap assessment.</strong> A parallel review of Ohio Administrative Code provisions governing the exempt workforce to identify rules that require amendment or interpretive guidance in light of AI adoption — coordinated with DAS State Services and delivered with recommended rule language or interim policy direction.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">D4</div>
+          <div class="duty-text"><strong>Model MOU template for AI deployments.</strong> A standard memorandum of understanding template agencies can use when implementing AI tools with direct impact on bargaining unit work — reducing the time and inconsistency of ad hoc negotiations and giving OCB a consistent baseline across agencies.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">D5</div>
+          <div class="duty-text"><strong>Agency AI workforce transition playbook.</strong> A practical guide for agency HR and labor relations staff covering the labor relations steps required when deploying AI tools — including notification obligations, classification review triggers, labor-management committee discussion requirements, and escalation paths to OCB.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">D6</div>
+          <div class="duty-text"><strong>Training curriculum and delivery.</strong> A developed and delivered training program for agency management on the labor relations dimensions of AI adoption — covering contract obligations, exempt workforce policy requirements, and OCB resources available for support. Delivered to HR and labor relations staff across agencies within the first program year.</div>
+        </div>
+        <div class="duty-row">
+          <div class="duty-num">D7</div>
+          <div class="duty-text"><strong>OCB AI workforce policy position.</strong> A written policy position establishing OCB's interpretive stance on key AI workforce questions — how AI-assisted work affects classification, what constitutes a material change in job duties, and when collective bargaining obligations are triggered. Provides agencies with a consistent reference point and reduces reactive inquiry volume to OCB staff.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Worker characteristics</div>
+      <div class="card">
+        <div class="card-body">Knowledge of project management; labor relations; collective bargaining; public policy management; contract interpretation; change management; training and development; public administration. Skill in AI and emerging technology tools; project planning software; presentation development; stakeholder communication. Ability to manage multiple cross-agency initiatives concurrently; translate complex technical developments into labor relations implications; develop and deliver executive-level presentations; build consensus among parties with competing interests.</div>
+        <div class="pill-row">
+          <span class="pill">Project management</span>
+          <span class="pill">Labor relations</span>
+          <span class="pill">Collective bargaining</span>
+          <span class="pill">AI/technology literacy</span>
+          <span class="pill">Policy analysis</span>
+          <span class="pill">Change management</span>
+          <span class="pill">Contract interpretation</span>
+          <span class="pill">Cross-agency coordination</span>
+          <span class="pill">Executive communication</span>
+          <span class="pill">Training & facilitation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── CLASSIFICATION FIT ── -->
+  <div id="class" class="tab-panel">
+
+    <div class="section">
+      <div class="section-label">Why PM 2 (series 6338, code 63382) fits this role</div>
+      <div class="card">
+        <div class="card-title">The PM 2 knowledge and skill requirements map directly</div>
+        <div class="card-body">The specification requires thorough knowledge of project management and life cycle methodologies across all nine knowledge areas: integration, scope, time, cost, quality, human resources, communications, risk, and procurement management. AI workforce transformation is not a single project — it is a sustained, multi-initiative program requiring all of those competencies applied simultaneously across agencies with different systems, contracts, and workforces. The specification also specifically calls for the ability to "manage multiple demands or tasks on projects or programs," "solve problems involving several variables in unique situations," and "build consensus in a team setting" — each of which describes the daily reality of this function.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Scope: external stakeholders and executive engagement</div>
+        <div class="card-body">PM 2 is defined by projects whose primary stakeholders are executives and whose activities involve organizations external to the assigned agency. This role's work is conducted entirely at that level — agency directors, human capital officers, and union leadership across state government. OCB serves every agency rather than one, which means any position embedded here and working outward meets the PM 2 scope threshold by the nature of where it sits.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Minimum qualifications</div>
+        <div class="card-body">PM 2 requires either (a) 2 years post-secondary education plus 12 months budgeting and 12 months project management experience, or (b) 4 years project management experience plus 12 months budgeting. A master's degree combined with years of multi-project management and budget oversight in state service meets and exceeds the standard under every pathway in the specification.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">The LRA 2 alternative (series 6347, code 63476)</div>
+        <div class="card-body">LRA 2 is also at Pay Range 16. Its duties center on representing management in arbitrations, grievances, and negotiations — which this role touches but does not primarily perform. LRA 2 is a defensible classification if leadership prefers a familiar title. The tradeoff is internal optics: existing LRA staff may read it as a career-path intrusion. PM 2 avoids that friction entirely because it is a different series with a distinct function profile.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Pay range</div>
+      <div class="metric-grid" style="grid-template-columns: 1fr;">
+        <div class="metric">
+          <div class="metric-label">PM 2 / Pay Range 16 ✓</div>
+          <div class="metric-value">Cross-agency scope</div>
+          <div class="metric-sub">Primary stakeholders are agency executives; work involves organizations external to OCB — the defining characteristics of PM 2 in the classification specification</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">What makes this a clean fit and not a stretch</div>
+      <div class="callout">
+        The PM 2 specification was written for exactly this kind of work: sustained, multi-phase initiatives that cut across agencies, require executive-level stakeholder management, and demand someone who can coordinate complexity without direct authority over the people doing the work. That is precisely what AI workforce transformation requires. The subject matter is new; the project management discipline it demands is not.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── RISKS ── -->
+  <div id="risks" class="tab-panel">
+
+    <div class="section">
+      <div class="section-label">Anticipated objections and how to meet them</div>
+      <div class="risk-list">
+        <div class="risk-row">
+          <span class="risk-tag risk-high">High</span>
+          <div class="risk-body"><strong>"We don't have budget for a new position."</strong> This is a vacant PR 15 slot already approved. The request is to reclassify it to PR 16, not to create a new FTE. The incremental cost is the difference between two pay ranges — a modest investment relative to the function being added and the exposure it mitigates.</div>
+        </div>
+        <div class="risk-row">
+          <span class="risk-tag risk-high">High</span>
+          <div class="risk-body"><strong>"AI impacts are speculative — this isn't a defined need yet."</strong> The grievances and classification disputes aren't speculative. They are already being generated by agencies making AI deployment decisions right now, without OCB input. The question is whether OCB gets ahead of them or reacts to them after the fact. This role is risk mitigation, not a bet on the future.</div>
+        </div>
+        <div class="risk-row">
+          <span class="risk-tag risk-med">Med</span>
+          <div class="risk-body"><strong>"Our existing LRAs can absorb this work."</strong> AI workforce transformation is a full-time coordination function, not marginal work that fits into an existing caseload. The cross-agency project management, ongoing environmental scanning, and external forum representation are distinct deliverables. Adding them to existing staff means they will be deprioritized — which is how OCB ends up behind the curve when the first significant AI-related arbitration lands.</div>
+        </div>
+        <div class="risk-row">
+          <span class="risk-tag risk-med">Med</span>
+          <div class="risk-body"><strong>Internal staff friction (primarily under LRA 2).</strong> PM 2 is the preferred classification precisely because it is a different series with a distinct function profile — there is no career ladder being bypassed, it is a new one. If LRA 2 is ultimately the chosen classification, the technology specialization angle is what differentiates this seat from existing LRA roles and should be emphasized in how the position is introduced internally.</div>
+        </div>
+        <div class="risk-row">
+          <span class="risk-tag risk-low">Low</span>
+          <div class="risk-body"><strong>"Where does this person sit and who do they report to?"</strong> Embedded in OCB, reporting to the OCB director or designee. Liaison relationship with DAS State Services leadership on AI matters. Clean reporting structure — no new org unit, no dotted-line ambiguity. One seat, one home, clear accountability.</div>
+        </div>
+        <div class="risk-row">
+          <span class="risk-tag risk-low">Low</span>
+          <div class="risk-body"><strong>"How do we measure whether this role is working?"</strong> Concrete outputs exist from the start: cross-agency AI deployment inventory, contract language gap analysis across five bargaining units, training materials delivered to agency HR staff, and a reduction in reactive grievance response on AI-related issues. These are trackable deliverables, not ambient activity.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">The bottom line</div>
+      <div class="callout">
+        AI is actively reshaping what state employees do and how they're classified. OCB can shape that conversation or inherit the fallout — but it cannot do neither. A PM 2 at PR 16, embedded in OCB and focused entirely on this function, is a low-cost way to own that space with intention. The alternative is continuing to absorb AI-related labor questions reactively, one grievance at a time, with staff who were hired to do something else.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    Prepared for the Office of Collective Bargaining, Department of Administrative Services. Classification specifications referenced: Series 6338 (Project Manager, effective 05/04/2014) and Series 6347 (Labor Relations Administrator, effective 12/10/2017). Pay range references per the Ohio State Classification and Compensation Plan.
+  </div>
+
+</div>
+
+<script>
+  function switchTab(btn, id) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
